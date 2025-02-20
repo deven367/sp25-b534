@@ -38,7 +38,7 @@
 
 In this assignment, we create a kubernetes cluster, fire a shell in that cluster and forward a port to the system outside.
 
-Steps involved in creating and installing the cluster were the most difficult for me as I could find a starter image to instantiate the container. Upon going through the documentation on the `kubernetes' website, I found the yml file required to start the cluster. Once the container was fired up, the remaining process was pretty straightforward. Here are the steps, I followed
+Steps involved in creating and installing the cluster were the most difficult for me as I couldn't find a starter image to instantiate the container. Upon going through the documentation on the `kubernetes' website, I found the yml file required to start the cluster. Once the container was fired up, the remaining process was pretty straightforward. Here are the steps, I followed.
 
 
 
@@ -59,18 +59,22 @@ curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikub
 sudo install minikube-darwin-arm64 /usr/local/bin/minikube
 \end{lstlisting}
 
+\section*{Starting the container}
 
-% \begin{enumerate}
-%     \item
-%     \item I then installed the `kubectl' command line tool using the   `curl' command.
-%     \item I installed the `minikube' command line tool using the the same `curl` command.
-% \end{enumerate}
-%     \item The server has a MessageHandler class that processes the JSON message and sends a response back to the client.
-% \end{enumerate}
+To create the kubernetes container, I first started Docker, and then
+
+\begin{lstlisting}
+minikube start
+kubectl create -f shell-demo.yml  # to create the container
+kubectl get pods                     # to check if the container is running
+
+# launch the container
+kubectl exec -it shell-demo -- /bin/bash
+\end{lstlisting}
 
 \section*{Copying files to the container}
 
-Using the command given in the assignment, I copied the files to the container.
+Using the command given in the assignment 1, I copied the files to the container.
 
 % The command was `kubectl cp hw1 shell-demo:hw1'
 
