@@ -70,7 +70,13 @@ showed the built image.
 
 \section{Running containers}
 
-After building the container, creating and running the pods is straightforward. We create the pods the given yaml files and run the pods.
+After building the container, creating and running the pods is straightforward. We create the pods the given yaml files and run the pods. The three configs in the repository define various things,
+
+\begin{enumerate}
+    \item dms-service.yaml - defines a headless service (dms-svc) to manage pods with the gservice label.
+    \item dms-sset.yaml - creates a StatefulSet with 4 replicas, ensuring stable network identities.
+    \item dms.yaml - defines a single standalone pod, separate from the StatefulSet.
+\end{enumerate}
 
 \begin{lstlisting}
     kubectl apply -f dms-service.yaml
