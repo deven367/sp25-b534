@@ -22,3 +22,15 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+  features:
+    - navigation.tabs
+
+nav:
+  - Home: index.md
+  - Midterm:
+    - midterm-prep.md
+    - part-1.md
+    - part-2.md
+    - part-3.md
+    - part-4.md
+  - Project: project.md
