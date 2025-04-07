@@ -33,4 +33,8 @@ nav:
     - part-2.md
     - part-3.md
     - part-4.md
-  - Project: project.md
+  - Project:
+    - project.md
+    - deepep.md
+    - differences.md
+    - inference.md
