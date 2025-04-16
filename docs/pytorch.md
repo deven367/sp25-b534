@@ -31,6 +31,13 @@
 1. creates multiple copies of the model across the `N` gpus
 2. redundant use of memory because of multiple copies of the model, way to overcome this is with sharding
 
+### links
+
+1. [korean overview](https://tutorials.pytorch.kr/beginner/dist_overview.html#:~:text=Collective%20Communication%20(c10d)%20library%20supports,e.g.%2C%20send%20and%20isend).)
+2. [ddp tutorial](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html)
+3. [ddp notes](https://pytorch.org/docs/stable/notes/ddp.html)
+4. [medium article](https://medium.com/@yashdoza21/scaling-model-training-across-multiple-gpus-efficient-strategies-with-pytorch-ddp-and-fsdp-d744be462667)
+
 ## fsdp
 
 may or may not talk about it. I am mostly not going to talk about it. As there are too many things to include in all of this, sharding, policy, scatter, Reduce and too many things.
