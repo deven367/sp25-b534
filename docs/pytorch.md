@@ -1,6 +1,6 @@
 # Distributed training
 
-> This arctcle talks about distributed training in PyTorch
+> This article talks about distributed training in PyTorch
 
 ## ddp
 
