@@ -1,5 +1,7 @@
 # Distributed training
 
+**I have spoken with Dr. Swany for my project**
+
 > Deven Mistry, <demistry@iu.edu>
 >
 > This article talks about distributed training in PyTorch
