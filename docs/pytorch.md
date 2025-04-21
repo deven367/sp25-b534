@@ -14,9 +14,18 @@
 ### things to talk about
 
 1. processgroup c10d
+   1. `ProcessGroup` manages the communication between different processes participating in distributed training. It handles operations like `all_reduce`, `broadcast`, `scatter`, etc.
 2. backend type "gloo", "nccl", etc
+   1. `nccl` — Optimized for NVIDIA GPUs, recommended for multi-GPU setups.
+   2. `gloo` — CPU and GPU compatible, often used for multi-node training when GPUs aren't available.
+   3. `mpi` — Uses the MPI library for communication (less commonly used nowadays).
 3. data distribution using the `DistributedSampler`
+   1. Ensures each process gets a unique, non-overlapping subset of the data.
+   2. Typically used with a `DataLoader` to evenly split and shuffle the dataset.
 4. Major piece: gradient synchronization
+   1. The core of DDP.
+   2. During the backward pass, gradients are averaged across all GPUs using an **all-reduce** operation.
+   3. Synchronization happens automatically when `.backward()` is called on the loss.
 5. when to use this?
    1. ideally when your model fits entirely on a single GPU
    2. used in cases when you have a lot of data, that you can split across multiple GPUs
@@ -40,4 +49,4 @@
 
 ## fsdp
 
-may or may not talk about it. I am mostly not going to talk about it. As there are too many things to include in all of this, sharding, policy, scatter, Reduce and too many things.
+> **Note:** I might not cover FSDP because it introduces additional complexity — involving sharding policies, parameter scattering, optimizer state partitioning, and advanced collective operations like `ReduceScatter`. It’s a powerful approach but deserves its own dedicated explanation.
