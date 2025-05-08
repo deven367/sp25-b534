@@ -174,3 +174,5 @@ cython_debug/
 *.synctex.gz
 *.pdf
 .DS_Store
+*.csv
+logs/
