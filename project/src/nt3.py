@@ -84,16 +84,20 @@ class Trainer:
         self.dataloader = dataloader
         self.optimizer = optimizer
 
+        self.file_path = os.path.join("bench", self.conf_name)
+        self.epoch_file_path = os.path.join("bench", f"{self.conf_name}_epochs.csv")
+        self.step_file_path = os.path.join("bench", f"{self.conf_name}_steps.csv")
+
         # Create CSV files with headers if they don't exist
         if self.rank == 0:
             # For epoch-level logging
-            if not os.path.exists(f"{self.conf_name}_epochs.csv"):
-                with open(f"{self.conf_name}_epochs.csv", "w") as f:
+            if not os.path.exists(self.epoch_file_path):
+                with open(self.epoch_file_path, "w") as f:
                     f.write("rank,epoch,loss,perplexity,time\n")
 
             # For step-level logging
-            if not os.path.exists(f"{self.conf_name}_steps.csv"):
-                with open(f"{self.conf_name}_steps.csv", "w") as f:
+            if not os.path.exists(self.step_file_path):
+                with open(self.step_file_path, "w") as f:
                     f.write("rank,epoch,step,loss,perplexity,time\n")
 
     def train(self, epochs):
@@ -152,7 +156,7 @@ class Trainer:
                           f"Tokens/sec: {tokens_per_sec:.2f}")
 
                     # Log to CSV
-                    with open(f"{self.conf_name}_steps.csv", "a") as f:
+                    with open(self.step_file_path, "a") as f:
                         f.write(f"{self.rank},{epoch+1},{step},{avg_step_loss:.4f},{avg_step_ppl:.4f},{elapsed:.4f}\n")
 
                     # Reset step counters
@@ -168,7 +172,7 @@ class Trainer:
             avg_ppl = ppl / batch_count if batch_count > 0 else 0
 
             # Log epoch results
-            with open(f"{self.conf_name}_epochs.csv", "a") as f:
+            with open(self.epoch_file_path, "a") as f:
                 f.write(f"{self.rank},{epoch+1},{avg_loss:.4f},{avg_ppl:.4f},{epoch_elapsed:.4f}\n")
 
             print(f"[GPU {self.rank}] Epoch {epoch+1} Complete | "
