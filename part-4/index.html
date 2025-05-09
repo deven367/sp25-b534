@@ -1,0 +1,1295 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../part-3/">
+      
+      
+        <link rel="next" href="../project/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Part 4 - Networking - sp25-b534</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#part-4-networking" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="sp25-b534" class="md-header__button md-logo" aria-label="sp25-b534" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            sp25-b534
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Part 4 - Networking
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../midterm-prep/" class="md-tabs__link">
+          
+  
+  
+  Midterm
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../project/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="sp25-b534" class="md-nav__button md-logo" aria-label="sp25-b534" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    sp25-b534
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Midterm
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Midterm
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../midterm-prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    stuff to prepare (bill of materials)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 1 - Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 2 - Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 3 - Communication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Part 4 - Networking
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Part 4 - Networking
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topologies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topologies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtualization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdn-and-nfv" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDN and NFV
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-defined-networking-sdn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software Defined Networking (SDN)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routers-and-routing-switches-and-switching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Routers and Routing, Switches and Switching
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#match-action-pairs-and-flow-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Match, Action Pairs and Flow Tables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall-and-nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Firewall and NAT
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-function-virtualization-nfv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Function Virtualization (NFV)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Project
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Project
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deepep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DeepEP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../differences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Differences
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Distributed training
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topologies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topologies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtualization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdn-and-nfv" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDN and NFV
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-defined-networking-sdn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software Defined Networking (SDN)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routers-and-routing-switches-and-switching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Routers and Routing, Switches and Switching
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#match-action-pairs-and-flow-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Match, Action Pairs and Flow Tables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall-and-nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Firewall and NAT
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-function-virtualization-nfv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Function Virtualization (NFV)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="part-4-networking">Part 4 - Networking</h1>
+<h2 id="topologies">Topologies</h2>
+<ul>
+<li>Data Center Network Topologies</li>
+<li>Multipath, Multistage, Multilink, challenges and benefits</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Multipath</th>
+<th>Multistage</th>
+<th>Multilink</th>
+<th>Challenges</th>
+<th>Benefits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td>Multiple paths for data transmission.  Data travels through several paths before reaching its destination.</td>
+<td>Series of optical switches or amplifiers to increase bandwidth and reduce signal loss.</td>
+<td>A single fiber optic link with multiple optical splitters to increase bandwidth and reduce distance.</td>
+<td>High cost, complex implementation, potential for signal degradation</td>
+<td>Increased bandwidth, reduced signal loss, improved reliability</td>
+</tr>
+<tr>
+<td><strong>How it Works</strong></td>
+<td>Data travels along multiple paths, often with different wavelengths.</td>
+<td>Multiple optical switches/amplifiers placed in a sequence.</td>
+<td>Optical splitters create multiple paths from a single fiber.</td>
+<td>Difficult to implement, requires careful alignment and control.</td>
+<td>Higher bandwidth, reduced signal loss, improved signal quality</td>
+</tr>
+<tr>
+<td><strong>Complexity</strong></td>
+<td>Relatively simple conceptually.</td>
+<td>Complex – requires careful design and control.</td>
+<td>Moderate – requires managing multiple optical paths.</td>
+<td>High complexity, requires specialized equipment and expertise.</td>
+<td>Simplified system design, lower implementation costs</td>
+</tr>
+<tr>
+<td><strong>Typical Use</strong></td>
+<td>High-bandwidth applications like video streaming, large data transfers.</td>
+<td>Longer distances, high-capacity networks.</td>
+<td>Dense-mode fiber optic networks, long-haul connections.</td>
+<td>High initial cost, difficult to troubleshoot, requires significant investment</td>
+<td>Reduced bandwidth costs, improved network capacity, increased distance capabilities</td>
+</tr>
+<tr>
+<td><strong>Main Benefit</strong></td>
+<td>Increased bandwidth &amp; reduced latency for certain applications.</td>
+<td>Increased bandwidth, improved reliability, reduced congestion.</td>
+<td>Increased bandwidth &amp; reduced cost for long-distance connections.</td>
+<td>High initial cost &amp; complexity, specialized expertise needed</td>
+<td>Enhanced network capacity, improved performance, reduced deployment costs</td>
+</tr>
+</tbody>
+</table>
+<h2 id="virtualization">Virtualization</h2>
+<ul>
+<li>Basic VLANs</li>
+<li>Other virtualization protocols and models</li>
+</ul>
+<h2 id="sdn-and-nfv">SDN and NFV</h2>
+<ul>
+<li>Software Defined Networking</li>
+<li>Routers and Routing, Switches and Switching</li>
+<li>Match, Action pairs and Flow Tables</li>
+<li>What is a firewall? What is a NAT?</li>
+<li>Network Function Virtualization</li>
+</ul>
+<h2 id="software-defined-networking-sdn">Software Defined Networking (SDN)</h2>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th><strong>Traditional Networking</strong></th>
+<th><strong>Software Defined Networking</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Integrated control and data planes within each device</td>
+<td>Separation of control plane and data plane</td>
+</tr>
+<tr>
+<td><strong>Control</strong></td>
+<td>Distributed control across network devices</td>
+<td>Centralized control via SDN controller</td>
+</tr>
+<tr>
+<td><strong>Programmability</strong></td>
+<td>Limited programmability via CLI/SNMP</td>
+<td>Highly programmable via APIs and software interfaces</td>
+</tr>
+<tr>
+<td><strong>Management</strong></td>
+<td>Device-by-device configuration</td>
+<td>Network-wide policy implementation</td>
+</tr>
+<tr>
+<td><strong>Flexibility</strong></td>
+<td>Static configurations, limited automation</td>
+<td>Dynamic configuration, highly automated</td>
+</tr>
+<tr>
+<td><strong>Innovation Pace</strong></td>
+<td>Slow, dependent on vendor development cycles</td>
+<td>Rapid, software-driven innovation</td>
+</tr>
+<tr>
+<td><strong>Protocols</strong></td>
+<td>Vendor-specific or standard protocols (OSPF, BGP)</td>
+<td>OpenFlow, NETCONF, REST APIs</td>
+</tr>
+<tr>
+<td><strong>Visibility</strong></td>
+<td>Limited network-wide visibility</td>
+<td>Comprehensive network-wide visibility</td>
+</tr>
+</tbody>
+</table>
+<h2 id="routers-and-routing-switches-and-switching">Routers and Routing, Switches and Switching</h2>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th><strong>Routers/Routing</strong></th>
+<th><strong>Switches/Switching</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OSI Layer</strong></td>
+<td>Network layer (Layer 3)</td>
+<td>Data link layer (Layer 2)</td>
+</tr>
+<tr>
+<td><strong>Addressing</strong></td>
+<td>Uses IP addresses</td>
+<td>Uses MAC addresses</td>
+</tr>
+<tr>
+<td><strong>Scope</strong></td>
+<td>Between networks/subnets</td>
+<td>Within the same network/broadcast domain</td>
+</tr>
+<tr>
+<td><strong>Decision Making</strong></td>
+<td>Route selection based on IP addressing and routing tables</td>
+<td>Frame forwarding based on MAC address tables</td>
+</tr>
+<tr>
+<td><strong>Protocols</strong></td>
+<td>BGP, OSPF, RIP, EIGRP</td>
+<td>Spanning Tree Protocol (STP), VLANs</td>
+</tr>
+<tr>
+<td><strong>Function</strong></td>
+<td>Connects different networks and routes traffic between them</td>
+<td>Connects devices within a network segment</td>
+</tr>
+<tr>
+<td><strong>Broadcast Handling</strong></td>
+<td>Typically blocks broadcasts</td>
+<td>Forwards broadcasts within a VLAN</td>
+</tr>
+<tr>
+<td><strong>Intelligence</strong></td>
+<td>Higher processing overhead for packet inspection</td>
+<td>Lower processing overhead for frame switching</td>
+</tr>
+<tr>
+<td><strong>Typical Use</strong></td>
+<td>Internet connectivity, WAN connections</td>
+<td>LAN connectivity, workgroup connections</td>
+</tr>
+</tbody>
+</table>
+<h2 id="match-action-pairs-and-flow-tables">Match, Action Pairs and Flow Tables</h2>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th><strong>Description</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Match Fields</strong></td>
+<td>Packet header fields used for comparison</td>
+<td>Source/destination IP, MAC, ports, protocol type</td>
+</tr>
+<tr>
+<td><strong>Actions</strong></td>
+<td>Operations performed on matching packets</td>
+<td>Forward, drop, modify, count, queue</td>
+</tr>
+<tr>
+<td><strong>Flow Table Structure</strong></td>
+<td>Ordered collection of flow entries</td>
+<td>Priority, match fields, counters, actions, timeouts</td>
+</tr>
+<tr>
+<td><strong>Processing Pipeline</strong></td>
+<td>Sequential evaluation through multiple tables</td>
+<td>Packet enters → matched → actions applied → next table</td>
+</tr>
+<tr>
+<td><strong>Entry Types</strong></td>
+<td>Different rule types in flow tables</td>
+<td>Exact match, wildcard match, priority-based entries</td>
+</tr>
+<tr>
+<td><strong>Controller Interaction</strong></td>
+<td>When no match is found in flow tables</td>
+<td>Packet sent to controller, controller adds new flow entry</td>
+</tr>
+<tr>
+<td><strong>Performance Factors</strong></td>
+<td>Elements affecting flow table operation</td>
+<td>Table size, lookup speed, update frequency</td>
+</tr>
+<tr>
+<td><strong>Security Considerations</strong></td>
+<td>Security aspects of flow tables</td>
+<td>Flow rule verification, authentication of updates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="firewall-and-nat">Firewall and NAT</h2>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th><strong>Firewall</strong></th>
+<th><strong>Network Address Translation (NAT)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary Purpose</strong></td>
+<td>Security - filters traffic based on rules</td>
+<td>Addressing - maps private IPs to public IPs</td>
+</tr>
+<tr>
+<td><strong>Function</strong></td>
+<td>Controls incoming/outgoing network traffic</td>
+<td>Modifies packet headers to enable shared public IP usage</td>
+</tr>
+<tr>
+<td><strong>Types</strong></td>
+<td>Stateless, stateful, next-gen, WAF, proxy</td>
+<td>Static NAT, Dynamic NAT, PAT (Port Address Translation)</td>
+</tr>
+<tr>
+<td><strong>OSI Layers</strong></td>
+<td>Can operate at layers 3-7 depending on type</td>
+<td>Primarily operates at layers 3-4</td>
+</tr>
+<tr>
+<td><strong>Security Role</strong></td>
+<td>Primary security device</td>
+<td>Security by obscuring internal addressing</td>
+</tr>
+<tr>
+<td><strong>Configuration Focus</strong></td>
+<td>Access control rules, inspection depth</td>
+<td>Address pools, port mapping, timeouts</td>
+</tr>
+<tr>
+<td><strong>Typical Placement</strong></td>
+<td>Network perimeter, segments, hosts</td>
+<td>Edge of private networks</td>
+</tr>
+<tr>
+<td><strong>Scalability Impact</strong></td>
+<td>Can become bottleneck under high traffic</td>
+<td>Can limit connection capacity due to port exhaustion</td>
+</tr>
+<tr>
+<td><strong>Modern Implementations</strong></td>
+<td>Integrated in UTM, cloud security groups</td>
+<td>Built into routers, load balancers, firewalls</td>
+</tr>
+</tbody>
+</table>
+<h2 id="network-function-virtualization-nfv">Network Function Virtualization (NFV)</h2>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th><strong>Traditional Network Functions</strong></th>
+<th><strong>Network Function Virtualization</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Implementation</strong></td>
+<td>Dedicated physical appliances</td>
+<td>Software running on standard hardware</td>
+</tr>
+<tr>
+<td><strong>Hardware Dependency</strong></td>
+<td>Purpose-built proprietary hardware</td>
+<td>Commodity x86 servers, storage, switches</td>
+</tr>
+<tr>
+<td><strong>Deployment Time</strong></td>
+<td>Days to weeks</td>
+<td>Minutes to hours</td>
+</tr>
+<tr>
+<td><strong>Scalability</strong></td>
+<td>Hardware addition/replacement required</td>
+<td>Dynamic scaling through virtualization</td>
+</tr>
+<tr>
+<td><strong>Capital Expense</strong></td>
+<td>High upfront costs for equipment</td>
+<td>Reduced CAPEX, pay-as-you-grow model</td>
+</tr>
+<tr>
+<td><strong>Operational Expense</strong></td>
+<td>Higher power, cooling, space requirements</td>
+<td>Lower operational costs through consolidation</td>
+</tr>
+<tr>
+<td><strong>Function Examples</strong></td>
+<td>Physical routers, firewalls, load balancers</td>
+<td>vRouter, vFirewall, vLoadBalancer, vIDS/IPS</td>
+</tr>
+<tr>
+<td><strong>Management</strong></td>
+<td>Often device-specific management interfaces</td>
+<td>Unified management platforms</td>
+</tr>
+<tr>
+<td><strong>Service Chaining</strong></td>
+<td>Manual, hardware-based connections</td>
+<td>Dynamic, software-defined service chaining</td>
+</tr>
+<tr>
+<td><strong>Vendor Dependency</strong></td>
+<td>Often locked to specific vendors</td>
+<td>Multi-vendor support on common infrastructure</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
