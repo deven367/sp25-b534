@@ -33,6 +33,6 @@ python process.py
 
 Once the master csv files for epochs and steps are ready, the plots can be generated. The plots are generated using the `plot.ipynb`.
 
-Finally, the expected report is available in the `project` folder, as `report.pdf`.
+Finally, the expected report is available in the `project` folder, as `report.pdf`. The original tex file, and references are available as well.
 
 I personally really enjoyed working on this project, as I love working with such systems and training models, overall this was a wonderful course :smile:
